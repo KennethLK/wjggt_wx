@@ -8,6 +8,7 @@ Page({
     cash: {date: '2017-5-15 星期一', message: '本期余额 17'},
     recent: [
       { wday: '星期一', restaurant: '腊肉', 'amount': 120, left: -103, all: '田龙，赵宝旺，王池，冯浩然，敬亮，李靖' }
+      { wday: '星期二', restaurant: '绵阳米粉', 'amount': 76, left: -179, all: '田龙，赵宝旺，王池，冯浩然，龚彦铭，李靖' }
     ]
   },
   //事件处理函数
