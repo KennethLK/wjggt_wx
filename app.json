@@ -10,8 +10,8 @@
       "pagePath": "pages/index/index",
       "text": "一眼通"
     },{
-      "pagePath": "pages/reocordlist/index",
-      "text": "消费记录"
+      "pagePath": "pages/recordlist/index",
+      "text": "消费(收款)记录"
     },{
       "pagePath": "pages/addrecord/index",
       "text": "登记"
