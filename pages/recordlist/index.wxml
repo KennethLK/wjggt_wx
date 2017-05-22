@@ -1,2 +1,18 @@
 <!--pages/recordlist/index.wxml-->
 <text>pages/recordlist/index.wxml</text>
+<button bindtap="saveData">Save Data to Storage</button>
+<button bindtap="loadData">Load Data from Storage</button>
+
+<button bindtap="saveJsonData">Save JsonData to Storage</button>
+<button bindtap="loadJsonData">Load JsonData from Storage</button>
+
+<input type="text" bindinput="userInput" placeholder="这是我要保存的内容" />
+
+<view>
+<text>这是从存储读取的内容: </text><text>{{textData}}</text>
+</view>
+<view>
+<text>这是读取Json中的内容: </text><text>{{jsonData}}</text>
+</view>
+
+<view>{{lastError}}</view>

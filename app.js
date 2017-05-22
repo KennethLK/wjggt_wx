@@ -1,6 +1,6 @@
 //app.js
 
-const AV = require('./libs/av-weapp-min.js');
+const AV = require('./utils/av-weapp-min.js');
 
 App({
   onLaunch: function () {
@@ -17,25 +17,42 @@ App({
   },
   getEncData: function(cb){
     if (this.globalData.encryptedData)
-      typeof cb == "function" && cb(this.globalData.encryptedData);
+      typeof cb == "function" && cb(this.globalData.encryptedData)
     else
-      typeof cb == "function" && cb("null data");
+      typeof cb == "function" && cb("null data")
   },
   getUserInfo:function(cb){
     var that = this
     if(this.globalData.userInfo){
       typeof cb == "function" && cb(this.globalData.userInfo)
     }else{
+
+      var userInfo = wx.getStorageSync('userInfo');
+      if (userInfo){
+        that.globalData.userInfo = userInfo;
+        typeof cb == 'function' && cb(that.globalData.userInfo);
+        return;
+      }
+
       //调用登录接口
       wx.login({
-        success: function () {
+        success: function (info) {
+          var code = info.code;
           wx.getUserInfo({
             success: function (res) {
-              that.globalData.userInfo = res.userInfo
               typeof cb == "function" && cb(that.globalData.userInfo)
 
-              that.globalData.encryptedData = res.encryptedData;
-              
+              AV.Cloud.run('saveUser', {"code": code, "encData": res.encryptedData, "iv": res.iv})
+              .then(function(user){
+                
+                wx.setStorage({
+                  key: 'userInfo',
+                  data: user,
+                })
+              }, function (err){
+                that.globalData.lastError = err.message;
+              });
+
             }
           })
         }
@@ -44,6 +61,6 @@ App({
   },
   globalData:{
     userInfo:null,
-    encryptedData: ""
+    lastError: "",
   }
 })

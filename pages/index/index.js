@@ -1,11 +1,13 @@
 //index.js
 //获取应用实例
 var app = getApp()
+const AV = require('../../utils/av-weapp-min.js');
+
 Page({
   data: {
     motto: 'Hello World',
     userInfo: {},
-    cash: {},
+    cash: "星期三",
     recent: []
   },
   //事件处理函数
@@ -28,12 +30,7 @@ Page({
           { wday: '星期二', restaurant: '绵阳米粉', 'amount': 76, left: -179, all: '田龙，赵宝旺，王池，冯浩然，龚彦铭，李靖' }
         ]
       })
-    })
-
-    app.getEncData(function(str){
-
-      cash: str
-
     });
+
   }
 })

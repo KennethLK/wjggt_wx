@@ -5,7 +5,7 @@
     <text class="userinfo-nickname">{{userInfo.nickName}} </text>
   </view>
   <view style="align-items: center">
-  <text>{{cash.date}} {{cash.message}}</text>
+  <text>{{cash}}</text>
   </view>
   <block wx:for="{{recent}}" wx:for-item="record" wx:key="*this" style="align-items: left">
   <view style="flex-direction: row; align-items: left; margin-top: 20rpx">
