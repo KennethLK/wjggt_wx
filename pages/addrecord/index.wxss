@@ -5,8 +5,21 @@
 .center{
     align-items: center;
     text-align: center;
+    clear: both;
 }
 
 .input{
-  background: lightgray;
+  background: #F1F1F1;
+  float: left;
+  width: 100%;
+}
+.resitem{
+  width: 40%;
+  float: left;
+  margin: 15rpx;
+  font-size: small;
+}
+
+.cashTitle{
+  clear: left;
 }

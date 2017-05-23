@@ -7,13 +7,19 @@
   ],
   "tabBar": {
     "list": [{
+        "pagePath": "pages/index/index",
+        "iconPath": "pages/images/home2.png",
+        "selectedIconPath": "pages/images/home.png",
+        "text": "一眼通"
+      },{
         "pagePath": "pages/recordlist/index",
+        "iconPath": "pages/images/list2.png",
+        "selectedIconPath": "pages/images/list.png",
         "text": "消费(收款)记录"
       },{
-      "pagePath": "pages/index/index",
-      "text": "一眼通"
-    },{
       "pagePath": "pages/addrecord/index",
+      "iconPath": "pages/images/add2.png",
+      "selectedIconPath": "pages/images/add.png",
       "text": "登记"
     }]
   },

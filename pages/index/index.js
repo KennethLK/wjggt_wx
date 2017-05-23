@@ -22,7 +22,7 @@ Page({
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
       //更新数据
-        // cash: { date: '2017-5-15 星期一', message: '本期余额 17' },
+      var restaurant = wx.getStorageInfoSync('restaurant');
       that.setData({
         userInfo: userInfo,
         recent: [
