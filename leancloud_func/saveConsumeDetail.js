@@ -7,6 +7,8 @@
 	"recorderId": "592456f28d6d810058fad1c2",
 	"time": 1496324843225
 }
+	
+	console.log("save detai;");
 
 	var consumers = request.params.consumers; //消费人列表, 数组
 	var consumeId = request.params.consumeId; //消费id, 字符串
@@ -14,6 +16,13 @@
 	var recorderId = request.params.recorderId; //录入人
 	var time = request.params.time; //1970的毫秒数, 数字
 
+	var cnt = consumers.length;
+	var remainder = amount % cnt;
+	if (remainder>0){
+		amount = amount - remainder;
+	}
+	var avg = amount / cnt;
+	
 	var allCash = [];
 	var date = new Date();
 	date.setTime(time);
@@ -27,20 +36,16 @@
 	qs.equalTo('objectId', "123");
 	for (var i = consumers.length - 1; i >= 0; i--) {
 		var uid = consumers[i];
-		var cash = amount;
+		var cash = avg;
 		var usr = AV.Object.createWithoutData('WJUser', uid);
 		var ca = new AV.Object('WJCash');
 		ca.set('consume', consume);
-		ca.set('type', 1);
 		ca.set('user', usr);
 		ca.set('recorder', recorder);
 		ca.set('cash', cash);
 		ca.set('date', date);
 		allCash.push(ca);
 		console.log("add a record; user: " + consumers[i] + ";");
-
-		// var q = AV.Object.createWithoutData('WJUser', uid);
-		// qs.push(q);
 
 		var q = new AV.Query('WJUser');
 		q.equalTo('objectId', uid);
@@ -53,18 +58,45 @@
 		console.log('获取到用户:' + users.length);
 		users.forEach(function(result){
 			var balance = result.get('cash');
+			var spend = result.get('spend');
 			console.log("balance: " + balance);
-	        balance -= amount;
+	        balance -= amount; //余额减少
+			spend += amount;  //花费增加
 	        result.set('cash', balance);
+	        result.set('spend', spend);
 			console.log("balance: " + balance);
 		});
 		return AV.Object.saveAll(users);
 	}).then(function(users){
 		console.log('扣款:' + users.length);
 		return AV.Object.saveAll(allCash);
+	}).then(function(results){
+		//保存消费关系
+		var relation = consume.relation('people');
+		results.map(relation.add.bind(relation));
+		if (remainder > 0)
+		{
+			consume.set('amount', amount);
+		}
+		return consume.save();
 	}).then(function(){
 		console.log('记录已保存');
-		response.success("扣款成功");
+		if (remainder > 0)
+		{
+			var juser = AV.Object.createWithoutData('WJUser', "5934133afe88c20061c56f52");
+			juser.fetch().then(function(){
+				juser.set('cash', remainder);
+				return juser.save();
+			}).then(function(){
+				response.success("扣款成功, 剩余脚帐:" + remainder);
+			}).catch(function(error){
+				console.log('发生错误了:' + error);
+			});
+		}
+		else{
+			response.success("扣款成功");
+		}
+		
 	}).catch(function(error){
 		console.log('发生错误了:' + error);
 		response.error('save cash error ' + error.message);

@@ -86,16 +86,16 @@ function saveConsumeDetail()
 
 	qs.find().then(function(users){
 		console.log('获取到用户:' + users.length);
-		results.forEach(function(result){
+		users.forEach(function(result){
 			var balance = result.get('cash');
 			console.log("balance: " + balance);
 	        balance += amount;
 	        result.set('cash', balance);
 			console.log("balance: " + balance);
 		});
-		return AV.Object.saveAll(results);
+		return 1;
 	}).then(function(users){
-		console.log('扣款:' + users.length);
+		console.log('扣款:' + users);
 		return AV.Object.saveAll(allCash);
 	}).then(function(){
 		console.log('记录已保存');

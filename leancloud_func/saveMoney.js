@@ -1,6 +1,7 @@
 var moneyStr = request.params.money;
 var userId = request.params.userId;
 var dateStr = request.params.time1970;
+var recorderId = request.params.recorderId; //字符串
 
 var money = parseInt(moneyStr);
 var time = parseInt(dateStr);
