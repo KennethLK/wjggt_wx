@@ -1,0 +1,111 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test for Guofu</title>
+	<!-- 存储服务 -->
+	<script src="https://cdn1.lncld.net/static/js/av-min-1.5.3.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+<style type="text/css">
+	* {font-size: 30;}
+</style>
+</head>
+<body>
+<script>
+
+// 线上的
+// var APP_ID = 'zgOwiJsyN5DXaRr0q7PBa45n-gzGzoHsz';
+// var APP_KEY = 'ayYlvpO6eIKa2OOuqrWY91iG';
+        var APP_ID = 'rdBRaWlAUDRbABMzwAsGCG11-gzGzoHsz';
+
+        var APP_KEY = 'vU4Fm7XYX0TpHTNBAMPILbFp';
+
+AV.init({
+	appId: APP_ID,
+	appKey: APP_KEY	
+});
+
+var user = {};
+
+</script>
+
+
+<Input type="text" id="installId" value="安装序列号" />
+
+<Button onclick="javascript:saveConsumeDetail()">创建一个用户</Button><br /><br />
+
+<Input type="text" id="artworkId" value="58808583128fe1006c213e8c" style="width: 450" />
+<Button onclick="javascript:viewArtwork()">新增消费记录</Button><br /><br />
+
+<Input type="text" id="activityId" value="587f5e498d6d810058e51f29" style="width: 450"/>
+<Button onclick="javascript:viewActivity()">新增消费明细</Button><br /><br />
+
+<script type="text/javascript">
+
+function saveConsumeDetail()
+{
+	var consumers = ["5924eb2ea22b9d0058a208dc", "592500eca0bb9f005f7d7cb5","592501152f301e006b3692e6"]; //消费人列表, 数组
+	var consumeId = "59301daa0ce4630057ebb381"; //消费id, 字符串
+	var amount = 10; //人均后的钱钱, 数字
+	var recorderId = "592456f28d6d810058fad1c2"; //录入人
+	var time = 1496324843225; //1970的毫秒数, 数字
+
+	var allCash = [];
+	var date = new Date();
+	date.setTime(time);
+	console.log("date:" + date);
+	var recorder = AV.Object.createWithoutData('WJUser', recorderId);
+	console.log("recorderId:" + recorderId);
+	var consume = AV.Object.createWithoutData('WJConsume',consumeId);
+	console.log("consumeId:" + consumeId);
+
+	var qs = new AV.Query('WJUser');
+	qs.equalTo('objectId', "123");
+	for (var i = consumers.length - 1; i >= 0; i--) {
+		var uid = consumers[i];
+		var cash = amount;
+		var usr = AV.Object.createWithoutData('WJUser', uid);
+		var ca = new AV.Object('WJCash');
+		ca.set('consume', consume);
+		ca.set('type', 1);
+		ca.set('user', usr);
+		ca.set('recorder', recorder);
+		ca.set('cash', cash);
+		ca.set('date', date);
+		allCash.push(ca);
+		console.log("add a record; user: " + consumers[i] + ";");
+
+		// var q = AV.Object.createWithoutData('WJUser', uid);
+		// qs.push(q);
+
+		var q = new AV.Query('WJUser');
+		q.equalTo('objectId', uid);
+		
+		var q2 = AV.Query.or(q, qs);
+		qs = q2;
+	}
+
+	qs.find().then(function(users){
+		console.log('获取到用户:' + users.length);
+		results.forEach(function(result){
+			var balance = result.get('cash');
+			console.log("balance: " + balance);
+	        balance += amount;
+	        result.set('cash', balance);
+			console.log("balance: " + balance);
+		});
+		return AV.Object.saveAll(results);
+	}).then(function(users){
+		console.log('扣款:' + users.length);
+		return AV.Object.saveAll(allCash);
+	}).then(function(){
+		console.log('记录已保存');
+		response.success("扣款成功");
+	}).catch(function(error){
+		console.log('发生错误了:' + error);
+		response.error('save cash error ' + error.message);
+	});
+}
+
+</script>
+</body>
+</html>

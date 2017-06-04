@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class="container">
+  <view  bindtap="bindViewTap" class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}} </text>
+  </view>
+  <view style="align-items: center">
+  <text>{{cash.date}} {{cash.message}}</text>
+  </view>
+  <block wx:for="{{recent}}" wx:for-item="record" wx:key="*this" style="align-items: left">
+  <view style="flex-direction: row; align-items: left; margin-top: 20rpx">
+    <text class="log-item" style="margin: 10rpx">{{record.wday}}</text>
+    <text class="log-item" style="margin: 10rpx">{{record.restaurant}}</text>
+    <text class="log-item" style="margin: 10rpx">消费: {{record.amount}}</text>
+    <text class="log-item" style="margin: 10rpx">余额: {{record.left}}</text>
+    </view>
+    <view style="margin: 20rpx 0rpx 0rpx 40rpx; font-size: 20rpx">进餐人员: {{record.all}}</view>
+  </block>
+</view>

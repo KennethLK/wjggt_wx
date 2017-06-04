@@ -1,0 +1,8 @@
+/* pages/addrecord/index.wxss */
+
+@import "../common.wxss";
+
+.center{
+    align-items: center;
+    text-align: center;
+}

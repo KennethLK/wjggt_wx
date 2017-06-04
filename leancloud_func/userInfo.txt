@@ -1,0 +1,41 @@
+李靖
+{"__type":"Pointer","className":"WJUser","objectId":"5921cc590ce46300695a00a3"}
+田龙
+{"__type":"Pointer","className":"WJUser","objectId":"5921cc63a22b9d0058812e20"}
+王池
+{"__type":"Pointer","className":"WJUser","objectId":"5921cc6ca22b9d0058812e3d"}
+龚彦铭
+{"__type":"Pointer","className":"WJUser","objectId":"5921cc5f2f301e006b13c9a3"}
+赵宝旺
+{"__type":"Pointer","className":"WJUser","objectId":"5921cc682f301e006b13c9c2"}
+冯浩然
+{"__type":"Pointer","className":"WJUser","objectId":"5921cc728d6d810058df883c"}
+敬亮
+{"__type":"Pointer","className":"WJUser","objectId":"5921cc788d6d810058df884e"}
+
+消费
+515
+{"__type":"Pointer","className":"WJConsume","objectId":"5921ce100ce46300695a0a4f"}
+516
+{"__type":"Pointer","className":"WJConsume","objectId":"365921ce75a22b9d00588144fd"}
+517
+{"__type":"Pointer","className":"WJConsume","objectId":"355921ce88128fe1005c28f9cf"}
+518
+{"__type":"Pointer","className":"WJConsume","objectId":"325921ce99128fe1005c28fa1f"}
+519
+{"__type":"Pointer","className":"WJConsume","objectId":"235921ceb68d6d810058df957b"}
+
+
+{"encData": "sGrjRyhsRq7M9d/4ZOs4gah9SF9bMOrKo5EnX+N8yvexGfodIqQjXrKEDX7SeevRPo45RX61VOTUvDkw6Pb8i0RNzPTPYAOv6lyLvuN2M/qAC6sZQ+dZ7+GgztJYruH7c2c3PulXK878jOD+IrazfEh8nHcoIFKBlglLdnGtb13q5ONGHElu7MGTJ5RxGCv0vijZeXPgstBpO6WXVdH5lIUinp3B1ZPpFEaqRli7k0nfWWClHDYzwPRiFbsc9CHfhhqsumcYaRktDEbLfK8vypmsVS8cs2N1VjYLN5yxoVtwYUJiXJPEcBmOSOuMeUkOBm5koTQdlxJqb+1VEupNDwwmnoXikg5JGbDgugFYuW2coWadtqSqwvF6WFX2ilDYEysmnUCP9oQdlwu4AniECTXAZslsnLasplcoWGfSG9/5lNAo+l/L/Gj8lRDrtg/5VSz5IWy57fCBlKHCuncXyg==",
+"skey": "QdmkYMkyPqhs64Cv/jyleg==",
+"openId": "oTEbq0GnLYazKdOogwnX20B_pr1c",
+"iv": "47RfEJHYZhNW4gJ3qtDXNQ=="}
+
+
+{"encData": "TN1FAzDcgpsLI8vtXW6Jlw5mYmo/XHsfPOmtVU+sVhFIllcml3H4HHl+jMD0ddgFbISPcXQ08DLU8/PQOKXj2PIBi/jT5Xoa5K99quyaECFhrkpovfQQopw51xIHFvX2OBW0ZCGc85UQAtdR0VY3ry6gxhZF5fkR1iBwW7s5y0tMKi9HBqo3js7NOf46NBzX0sZo5kYDXmXj3+OZ0OoXYAlEMop0U8rAlPqB8hxLDGjHStxmxgrwmYLjB3eiNpYk4z063N/SIMzZ+UqdZNG+VyEeS6mmNnk2/LhrTNsP4bSKuIfBkNzrIEomVtpKCAoFY7TKp0OxOQqU5q9ohV0bk1vD7elEcLy3SVt1Hw4K4pjWBdJf1++W9I2rX2fA5E3XNJDEMSXpIuH5+GRJbhHHIJXK/5g3JHL2vU8ZGtuYGSQP5QFb5dL8ubgO+1hP+cPtCP95XKx/oVvggcxAx3FjVg==",
+"skey": "yJZ8JITw5iPUJZfX15d1/A==",
+"openId": "oTEbq0PAyU78nxo62nIoXeMGOBnU",
+"iv": "PoNqk73lyNS68nj93h1S5g=="}
+
+;openId: oTEbq0PAyU78nxo62nIoXeMGOBnU;skey: yJZ8JITw5iPUJZfX15d1/A==;iv: PoNqk73lyNS68nj93h1S5g==
+
