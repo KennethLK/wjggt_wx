@@ -1,6 +1,0 @@
-<!--pages/addrecord/index.wxml-->
-<view class="center">
-    <text>pages/addrecord/index.wxml</text>
-    <input id="money" value="100" />
-    <button>提交</button>
-</view>

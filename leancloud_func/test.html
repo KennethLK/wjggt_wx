@@ -6,7 +6,7 @@
 	<script src="https://cdn1.lncld.net/static/js/av-min-1.5.3.js"></script>
     <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
 <style type="text/css">
-	* {font-size: 30;}
+	* {font-size: 16;}
 </style>
 </head>
 <body>
@@ -28,43 +28,203 @@ var user = {};
 
 </script>
 
-<Input type="text" id="installId" value="安装序列号" />
-
-<Button onclick="javascript:saveConsumeDetail()">创建一个用户</Button><br /><br />
+<Button onclick="javascript:saveConsume()">保存消费记录</Button><br /><br />
 
 餐馆名称 <Input type="text" id="restaurantName" value="" style="width: 150" /><br />
-选择已有餐馆<div id="restaurantContainer" /><br />
+选择已有餐馆<div id="restaurantContainer" >
+	<input type="radio" name="restaurant" value="0" > 其他 <br >
+</div><br />
 <Button onclick="javascript:loadRestaurant()">加载餐馆</Button><br />
-消费金额 <Input type="text" id="restaurantName" value="" style="width: 150" /><br />
+消费金额 <Input type="text" id="amount" value="" style="width: 150" /><br />
 消费时间 <Input type="text" id="date" value="2017-6-2" style="width: 150" /><br />
-登记人 <Input type="text" id="date" value="2017-6-2" style="width: 150" /><br />
-选择用餐人员: <div id="consumerContainer" /><br />
+选择用餐人员: <div id="consumerContainer" >
+</div><br />
 <Button onclick="javascript:loadConsumer()">加载队员</Button><br />
-<Button onclick="javascript:saveConsume()">新增消费记录</Button><br /><br />
 
 <Input type="text" id="uid" value="592456f28d6d810058fad1c2" style="width: 450"/>
 <Button onclick="javascript:loadRecentConsume()">得到最近10天我的消费明细</Button><br /><br />
 
+<Button onclick="javascript: getCheckedItems()">选择的项目</Button>
+
 <script type="text/javascript">
+
+function saveConsume()
+{
+	var consumers = getConsumers();
+	var resObj= getRestaurant();
+	var amount = parseInt($("#amount").val());
+	var date = Date.parse($("#date").val());
+	// if (isNaN(amount) || amount == 0)
+	// {
+	// 	amount = Math.random((new Date().getMilliseconds())) * 50 + 80;
+	// 	amount = Math.ceil(amount);
+	// }
+
+	var validDateBase1 = Date.parse('2017-5-1')
+	var validDateBase2 = Date.parse('2018-5-1')
+
+	var resId, resName;
+	resId = resObj.id;
+	resName = resObj.name;
+	
+	if (isNaN(amount) || amount < 1){
+		alert("金额不对")
+		return;
+	}
+
+	if (resId == undefined && resName == ""){
+		alert("餐馆不对");
+		return;
+	}
+
+	if (date < validDateBase1 || date > validDateBase2)
+	{
+		alert("时间不对呢");
+		return;
+	}
+
+	if (consumers.length == 0)
+	{
+		alert("吃饭的人呢")
+		return;
+	}
+
+	var q = {};
+		q.name = resName;
+	if (resId != undefined)
+	{
+		q.resId = resId;
+	}
+	q.date = date;
+	q.amount = amount;
+	q.consumers = consumers;
+	q.recorderId = "592456f28d6d810058fad1c2";
+	q.groupId = "592ff945fe88c2006192a118";
+
+	AV.Cloud.run('saveConsume', q).then(function(rec){
+		alert('save success');
+	}).catch(function(error){
+		alert('error:' + error.message);
+	})
+}
+
+function getCheckedItems()
+{
+	//选中的餐馆
+	var resObj = getRestaurant();
+	alert("name: " + resObj.name);
+	alert("id:" + resObj.id);
+	//选中的食客
+	var consumers = getConsumers();
+	alert(consumers.length);
+}
+
+function getRestaurant()
+{
+	var got = false;
+	var restaurant;
+	var resId;
+	var restaurants = $("input[name='restaurant'").each(function(){
+		if ($(this).prop("checked"))
+		{
+			got = true;
+			resId = $(this).val();
+		}
+	});
+
+	if (!got)
+	{
+		restaurant = $("#restaurantName").val();
+	}
+
+	if(resId == "0"){
+		resId = undefined;
+	}
+
+	return {"name": restaurant, "id": resId};
+}
+
+function getConsumers()
+{
+	var consumers = [];
+	var restaurants = $("input[name='consumer'").each(function(){
+		if ($(this).prop("checked"))
+		{
+			consumers.push($(this).val());
+		}
+	});
+
+	return consumers;
+}
 
 function loadRestaurant()
 {
-
+	var ele = $('#restaurantContainer');
+	var q = new AV.Query('WJRestaurant');
+	q.find().then(function(reses){
+		reses.forEach(function(res){
+			var box = document.createElement('input');
+			box.setAttribute("type", "radio");
+			box.setAttribute("value", res.id);
+			box.setAttribute("name", "restaurant");
+			box.setAttribute("id", "restaurant");
+			ele.append(box);
+			ele.append(res.get('name'));
+			ele.append($("<br />"));
+		});
+	});
 }
 
 function loadConsumer()
 {
+	var ele = $('#consumerContainer');
+	var q = new AV.Query('WJUser');
+	q.notEqualTo('isHuman', false);
+	q.find().then(function(reses){
+		reses.forEach(function(res){
 
+			var box = document.createElement('input');
+			box.setAttribute("type", "checkbox");
+			box.setAttribute("value", res.id);
+			box.setAttribute("name", "consumer");
+			box.setAttribute("id", "consumer");
+			ele.append(box);
+			ele.append(res.get('name'));
+			ele.append($("<br />"));
+		});
+	});
 }
 
 function loadRecentConsume()
 {
-	var uid = $("uid").val();
-	var q0 = new AV.Query('WJConsume');
-	var date = new Date();
-	date.setTime(date - 1000 * 60 * 60 * 24 * 10);
-	q0.greaterThan('createdAt', date);
-	q0
+	var uid = $("#uid").val();
+	var q0 = new AV.Query('WJCash');
+	var usr = AV.Object.createWithoutData('WJUser', uid);
+	var infos = [];
+	q0.equalTo('user', usr);
+	q0.include('consume');
+	q0.include('user');
+	q0.limit(20);
+	q0.find().then(function(details){
+		details.forEach(function(detail){
+			var consume = detail.get("consume");
+			var cname = consume.get('name');
+			var pa = detail.get('cash');
+			var ca = consume.get('amount');
+			var pr = consume.get("peopleAmount");
+			var da = detail.get("date");
+			var dd = da.getDay();
+			var info = "时间: " + da.toLocaleString() + "[" + getDayName(dd) + "]" + ";餐馆:" + cname + ";消费金额: " + ca + "; 个人消费:" + pa + ";消费人数: " + pr;
+			infos.push(info);
+		});
+	}).catch(function(error){
+		alert('error:' + error.message);
+	});
+}
+
+function getDayName(day){
+	var names = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+	return names[day];
 }
 
 function saveConsumeDetail()
