@@ -28,18 +28,44 @@ var user = {};
 
 </script>
 
-
 <Input type="text" id="installId" value="安装序列号" />
 
 <Button onclick="javascript:saveConsumeDetail()">创建一个用户</Button><br /><br />
 
-<Input type="text" id="artworkId" value="58808583128fe1006c213e8c" style="width: 450" />
-<Button onclick="javascript:viewArtwork()">新增消费记录</Button><br /><br />
+餐馆名称 <Input type="text" id="restaurantName" value="" style="width: 150" /><br />
+选择已有餐馆<div id="restaurantContainer" /><br />
+<Button onclick="javascript:loadRestaurant()">加载餐馆</Button><br />
+消费金额 <Input type="text" id="restaurantName" value="" style="width: 150" /><br />
+消费时间 <Input type="text" id="date" value="2017-6-2" style="width: 150" /><br />
+登记人 <Input type="text" id="date" value="2017-6-2" style="width: 150" /><br />
+选择用餐人员: <div id="consumerContainer" /><br />
+<Button onclick="javascript:loadConsumer()">加载队员</Button><br />
+<Button onclick="javascript:saveConsume()">新增消费记录</Button><br /><br />
 
-<Input type="text" id="activityId" value="587f5e498d6d810058e51f29" style="width: 450"/>
-<Button onclick="javascript:viewActivity()">新增消费明细</Button><br /><br />
+<Input type="text" id="uid" value="592456f28d6d810058fad1c2" style="width: 450"/>
+<Button onclick="javascript:loadRecentConsume()">得到最近10天我的消费明细</Button><br /><br />
 
 <script type="text/javascript">
+
+function loadRestaurant()
+{
+
+}
+
+function loadConsumer()
+{
+
+}
+
+function loadRecentConsume()
+{
+	var uid = $("uid").val();
+	var q0 = new AV.Query('WJConsume');
+	var date = new Date();
+	date.setTime(date - 1000 * 60 * 60 * 24 * 10);
+	q0.greaterThan('createdAt', date);
+	q0
+}
 
 function saveConsumeDetail()
 {

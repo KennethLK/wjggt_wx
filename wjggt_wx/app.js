@@ -40,15 +40,15 @@ App({
           var code = info.code;
           wx.getUserInfo({
             success: function (res) {
-              typeof cb == "function" && cb(that.globalData.userInfo)
-
               AV.Cloud.run('saveUser', {"code": code, "encData": res.encryptedData, "iv": res.iv})
               .then(function(user){
                 
                 wx.setStorage({
                   key: 'userInfo',
                   data: user,
-                })
+                });
+                that.globalData.userInfo = user;
+                typeof cb == 'function' && cb(that.globalData.userInfo);
               }, function (err){
                 that.globalData.lastError = err.message;
               });
