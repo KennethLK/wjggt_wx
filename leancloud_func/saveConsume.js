@@ -38,7 +38,7 @@ if (!isNaN(time))
 	consumeDate.setTime(time);
 }
 
-var juser = AV.Object.createWithoutData('WJUser', "5934133afe88c20061c56f52"); //记录脚帐账号
+var juser = AV.Object.createWithoutData('WJUser', "5938ed085c497d006b6104c4"); //记录脚帐账号
 var remainder = 0;
 juser.fetch().then(function(){
 	remainder = juser.get("cash");

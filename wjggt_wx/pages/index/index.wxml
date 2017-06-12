@@ -1,19 +1,36 @@
 <!--index.wxml-->
-<view class="container">
+<scroll-view class="container">
   <view  bindtap="bindViewTap" class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}} </text>
   </view>
-  <view style="align-items: center">
-  <text>{{cash}}</text>
+  <view class="cashContainer" style="{{show_info}}">
+  <view class="balance">余额</view>
+  <view class="{{cashclass}}">
+  {{cash}}
   </view>
-  <block wx:for="{{recent}}" wx:for-item="record" wx:key="*this" style="align-items: left">
-  <view style="flex-direction: row; align-items: left; margin-top: 20rpx">
+
+  <!--<view class="more_detail">↓↓↓↓↓详细↓↓↓↓↓</view>-->
+  </view>
+
+  <view style="background-color: mintcream;padding-top: 20rpx;padding-bottom: 20rpx;{{show_group}}">
+  <view class="balance">加入小队</view>
+  <input type="text" style="background-color: white;" placeholder="点这里输入小队代号" bindinput="inputCode" />
+  <button style="width:200rpx;margin-top: 20rpx;" bindtap="joinGroup">加入小队</button>
+
+  <view class="balance">成立午餐小队</view>
+  <input type="text" style="background-color: white;" placeholder="点这里输入小队名字" bindinput="inputName" />
+  <view class="balance" style="color: red">小队代号: {{new_code}}</view>
+
+  <button style="width:200rpx;" bindtap="createGroup">成立小队</button>
+  </view>
+  <block wx:for="{{recent}}" wx:for-item="record" wx:key="*this" style="align-items: left; background-color: navy;">
+  <view style="flex-direction: row; align-items: left; margin-top: 60rpx">
     <text class="log-item" style="margin: 10rpx">{{record.wday}}</text>
     <text class="log-item" style="margin: 10rpx">{{record.restaurant}}</text>
     <text class="log-item" style="margin: 10rpx">消费: {{record.amount}}</text>
-    <text class="log-item" style="margin: 10rpx">余额: {{record.left}}</text>
+    <text class="log-item" style="margin: 10rpx">人数: {{record.peopleAmount}}</text>
     </view>
-    <view style="margin: 20rpx 0rpx 0rpx 40rpx; font-size: 20rpx">进餐人员: {{record.all}}</view>
+    <view style="margin: 20rpx 0rpx 0rpx 40rpx; font-size: 27rpx">小伙伴: {{record.all}}</view>
   </block>
-</view>
+</scroll-view>

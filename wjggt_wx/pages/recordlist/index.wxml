@@ -1,5 +1,5 @@
 <!--pages/recordlist/index.wxml-->
-<text>pages/recordlist/index.wxml</text>
+<!--<text>pages/recordlist/index.wxml</text>
 <button bindtap="saveData">Save Data to Storage</button>
 <button bindtap="loadData">Load Data from Storage</button>
 
@@ -16,3 +16,9 @@
 </view>
 
 <view>{{lastError}}</view>
+-->
+
+<view style="text-align: center; align-items: center;font-size: 100rpx;">{{rndResult}}</view>
+<view class="center">
+    <button bindtap="onRandom">随机</button>
+</view>

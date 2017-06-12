@@ -43,7 +43,7 @@ var user = {};
 
 <Input type="text" id="uid" value="592456f28d6d810058fad1c2" style="width: 450"/>
 <Button onclick="javascript:loadRecentConsume()">得到最近10天我的消费明细</Button><br /><br />
-
+<div Id="consumeDetailContainer"> </div>
 <Button onclick="javascript: getCheckedItems()">选择的项目</Button>
 
 <script type="text/javascript">
@@ -197,6 +197,33 @@ function loadConsumer()
 
 function loadRecentConsume()
 {
+
+var q = new AV.Query('WJGroup');
+q.equalTo('authCode', "5007");
+q.first(function (group){
+	if (group == undefined){
+		console.log("group not found");
+		return;
+	}
+	grp = group
+	console.log("group found:" + group.id);
+	var q = new AV.Query('WJUser');
+	q.get("593d5487da2f600067248fe22").then(function(tuser){
+		tuser.set('group', group);
+		tuser.save().then(function(user){
+			console.log("saved");
+		}, function (error){
+
+			console.log('save error' + error.message + ";group id: " + group.get("objectId"));
+		})
+	}).catch(function(error){
+		console.log('find user error' + error.message);
+	});
+}, function(error){
+	console.log("find group error: " + error.message);
+});
+
+return;
 	var uid = $("#uid").val();
 	var q0 = new AV.Query('WJCash');
 	var usr = AV.Object.createWithoutData('WJUser', uid);
@@ -214,8 +241,8 @@ function loadRecentConsume()
 			var pr = consume.get("peopleAmount");
 			var da = detail.get("date");
 			var dd = da.getDay();
-			var info = "时间: " + da.toLocaleString() + "[" + getDayName(dd) + "]" + ";餐馆:" + cname + ";消费金额: " + ca + "; 个人消费:" + pa + ";消费人数: " + pr;
-			infos.push(info);
+			var info = "<p>时间: " + da.toLocaleString() + "[" + getDayName(dd) + "]" + ";餐馆:" + cname + ";消费金额: " + ca + "; 个人消费:" + pa + ";消费人数: " + pr + "</p>";
+			$("#consumeDetailContainer").append(info);
 		});
 	}).catch(function(error){
 		alert('error:' + error.message);

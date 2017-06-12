@@ -1,4 +1,5 @@
 // pages/addrecord/index.js
+
 Page({
   data:{
     users: [{ name: "李靖", id: "5921cc590ce46300695a00a3"},
@@ -11,7 +12,7 @@ Page({
     restaurants:["腊肉", "宜宾燃面", "干拌", "过道", "黄焖鸡", "花溪米粉", "老麻抄手", "三顾冒菜", "拉面", "竹筒饭", "丸子", "C区食堂", "渝桥面", "麦当劳", "肯德基", "兵哥豌豆面", "酸菜鱼", "东北菜", "避风塘", "沁芥兰", "神牛饭", "过桥米线(会展)", "过桥米线(D区)"],
     selected: "",
     rndResult: "",
-    rndSource: []
+    rndSource: [],
   },
   checkboxChange: function(e){
     console.log(e.detail.value);

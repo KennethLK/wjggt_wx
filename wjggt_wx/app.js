@@ -26,8 +26,7 @@ App({
     if(this.globalData.userInfo){
       typeof cb == "function" && cb(this.globalData.userInfo)
     }else{
-
-      var userInfo = wx.getStorageSync('userInfo');
+      var userInfo = this.loadDataFromStorage('userInfo');
       if (userInfo){
         that.globalData.userInfo = userInfo;
         typeof cb == 'function' && cb(that.globalData.userInfo);
@@ -42,11 +41,9 @@ App({
             success: function (res) {
               AV.Cloud.run('saveUser', {"code": code, "encData": res.encryptedData, "iv": res.iv})
               .then(function(user){
-                
-                wx.setStorage({
-                  key: 'userInfo',
-                  data: user,
-                });
+
+                that.saveDataToStorage('userInfo', user);
+
                 that.globalData.userInfo = user;
                 typeof cb == 'function' && cb(that.globalData.userInfo);
               }, function (err){
@@ -58,6 +55,15 @@ App({
         }
       })
     }
+  },
+  saveDataToStorage: function(key, data){
+    wx.setStorage({
+      key: key,
+      data: data,
+    });
+  },
+  loadDataFromStorage: function(key){
+    return wx.getStorageSync(key);
   },
   globalData:{
     userInfo:null,

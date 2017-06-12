@@ -1,0 +1,65 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test for Guofu</title>
+	<!-- 存储服务 -->
+	<script src="https://cdn1.lncld.net/static/js/av-min-1.5.3.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+<style type="text/css">
+	* {font-size: 16;}
+</style>
+</head>
+<body>
+<script>
+
+// 线上的
+// var APP_ID = 'zgOwiJsyN5DXaRr0q7PBa45n-gzGzoHsz';
+// var APP_KEY = 'ayYlvpO6eIKa2OOuqrWY91iG';
+        var APP_ID = 'rdBRaWlAUDRbABMzwAsGCG11-gzGzoHsz';
+
+        var APP_KEY = 'vU4Fm7XYX0TpHTNBAMPILbFp';
+
+AV.init({
+	appId: APP_ID,
+	appKey: APP_KEY	
+});
+
+var user = {};
+
+</script>
+
+小组名称 <Input type="text" id="groupName" value="萨芬七" style="width: 150" /><br />
+小组代码: <input type="text" name="authCode" id="authCode" value="1984"><br />
+<Button onclick="javascript:createGroup()">创建小组</Button><br />
+
+小组代码 <Input type="text" id="authCode2" value="1984" style="width: 150" /><br />
+<Button onclick="javascript:joinGroup()">加入小组</Button><br />
+
+<script type="text/javascript">
+
+function createGroup()
+{
+	var groupName = $("#groupName").val();
+	var groupCode = $("#authCode").val();
+
+	AV.Cloud.run('createGroup', {"gname": groupName, "acode": groupCode, "uid": "593d5487da2f600067248fe2"}).then(function(group){
+		console.log("created group: " + group.id);
+	}).catch(function(error){
+		console.log("create group failed: " + error.message);
+	});
+}
+
+function joinGroup()
+{
+	var groupCode = $("#authCode").val();
+
+	AV.Cloud.run('joinGroup', {"acode": groupCode, "uid": "593d5487da2f600067248fe2"}).then(function(id){
+		console.log("joined group: " + id);
+	}).catch(function(error){
+		console.log("join group failed: " + error.message);
+	});
+}
+
+</script>
+</body>
+</html>

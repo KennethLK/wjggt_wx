@@ -23,8 +23,4 @@
     <button>提交</button>
 </view>
 
-<view style="text-align: center; align-items: center;font-size: 100rpx;">{{rndResult}}</view>
-<view class="center">
-    <button bindtap="onRandom">随机</button>
-</view>
 

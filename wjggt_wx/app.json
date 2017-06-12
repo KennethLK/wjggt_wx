@@ -1,8 +1,8 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/addrecord/index",
     "pages/recordlist/index",
-    "pages/index/index",
     "pages/logs/logs"
   ],
   "tabBar": {
@@ -15,7 +15,7 @@
         "pagePath": "pages/recordlist/index",
         "iconPath": "pages/images/list2.png",
         "selectedIconPath": "pages/images/list.png",
-        "text": "消费(收款)记录"
+        "text": "趣味订餐"
       },{
       "pagePath": "pages/addrecord/index",
       "iconPath": "pages/images/add2.png",

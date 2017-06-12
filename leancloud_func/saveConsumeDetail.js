@@ -60,8 +60,8 @@
 			var balance = result.get('cash');
 			var spend = result.get('spend');
 			console.log("balance: " + balance);
-	        balance -= amount; //余额减少
-			spend += amount;  //花费增加
+	        balance -= avg; //余额减少
+			spend += avg;  //花费增加
 	        result.set('cash', balance);
 	        result.set('spend', spend);
 			console.log("balance: " + balance);
@@ -83,7 +83,7 @@
 		console.log('记录已保存');
 		if (remainder > 0)
 		{
-			var juser = AV.Object.createWithoutData('WJUser', "5934133afe88c20061c56f52");
+			var juser = AV.Object.createWithoutData('WJUser', "5938ed085c497d006b6104c4");
 			juser.fetch().then(function(){
 				juser.set('cash', remainder);
 				return juser.save();
