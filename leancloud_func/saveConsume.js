@@ -1,7 +1,8 @@
 //saveConsume.js
 
 //测试数据
-var test = {
+/*
+{
 	"name": "黄焖鸡", 
 	"amount": 67, 
 	"consumers": ["5924eb2ea22b9d0058a208dc", "592500eca0bb9f005f7d7cb5","592501152f301e006b3692e6"],
@@ -9,6 +10,8 @@ var test = {
 	"groupId": "592ff945fe88c2006192a118",
 	"recorderId": "592456f28d6d810058fad1c2"
 }
+
+*/
 
 var rname = request.params.name; //字符串
 var cashStr = request.params.amount; //数字

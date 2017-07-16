@@ -10,7 +10,7 @@ Page({
     cash: -50,
     cashclass: "cash_minus",
     recent: [],
-    new_code: 1399,
+    new_code: "",
     show_group: "display: none",
     show_info: "display: none"
   },
@@ -22,15 +22,28 @@ Page({
   },
   joinGroup: function (e) {
     //加入小组
-    var param = {"acode": this.data.inputCode, "uid": this.data.userInfo.id};
-    AV.Cloud.run('joinGroup', param).then(function(group){
-
-    }).catch(function(error){
-      console.log("");
+    var param = { "acode": this.data.inputCode, "uid": this.data.userInfo.objectId};
+    AV.Cloud.run('joinGroup', param).then(function (groupId) {
+      console.log("加入小组成功: " + groupId);
+      //加入小组成功, 把小组信息存入到userInfo中
+      var user = app.globalData.userInfo;
+      user.group = groupId;
+      app.saveDataToStorage();
+    }).catch(function (error) {
+      console.log("加入小组失败: " + error.message);
     });
   },
   createGroup: function (e) {
-
+    var param = { "acode": this.data.new_code, "gname": this.data.inputName, "uid": this.data.userInfo.objectId};
+    AV.Cloud.run('createGroup', param).then(function (groupId) {
+      console.log("加入小组成功: " + groupId);
+      //创建小组成功, 把小组信息存入到userInfo中
+      var user = app.globalData.userInfo;
+      user.group = group;
+      app.saveDataToStorage();
+    }).catch(function (err){
+      console.log("创建小组失败: " + err.message);
+    });
   },
   inputCode: function (e) {
     var code = e.detail.value;
@@ -55,6 +68,21 @@ Page({
       {
         show_group = "";
         show_info = "display: none";
+
+        //加载新建小组id
+        var query = new AV.Query('GroupCodes');
+        query.equalTo('canUse', true);
+        query.addDescending('createdAt');
+        query.first().then(function(gcode){
+          var code = gcode.get('code');
+          that.setData({
+            "new_code": code
+          });
+        }).catch(function(err){
+          that.setData({
+            "new_code": "暂时无法新建小组, 请联系管理员"
+          });
+        });
       }
       else
       {

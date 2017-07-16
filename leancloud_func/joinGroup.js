@@ -9,13 +9,13 @@ var userId = request.params.uid;
 
 console.log("join code: " + authCode + "; user: " + userId);
 
-if (typeof userId === undefined)
+if (userId === undefined)
 {
 	response.error('userId invalid')
 	return;
 }
 
-if (typeof authCode === undefined)
+if (authCode === undefined)
 {
 	response.error('authCode invalid')
 	return;

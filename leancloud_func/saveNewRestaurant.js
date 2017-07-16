@@ -6,7 +6,7 @@
 var resId = request.params.resId;
 var resName = request.params.name;
 
-if (typeof resId !== 'undefined')
+if (resId !== 'undefined')
 {
 	//查询饭店
 	var res = AV.Object.createWithoutData('WJRestaurant', resId);
@@ -18,7 +18,7 @@ if (typeof resId !== 'undefined')
 }
 else 
 {
-	if (typeof resName === 'undefined') 
+	if (resName === 'undefined') 
 	{
 		var date = new Date();
 		resName = '食堂' + date.getTime();

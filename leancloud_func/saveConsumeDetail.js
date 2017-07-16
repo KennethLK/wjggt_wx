@@ -1,5 +1,7 @@
 //saveConsumeDetail.js
 
+/*
+
 {
 	"consumers": ["5924eb2ea22b9d0058a208dc", "592500eca0bb9f005f7d7cb5","592501152f301e006b3692e6"],
 	"consumeId": "59301daa0ce4630057ebb381",
@@ -7,7 +9,8 @@
 	"recorderId": "592456f28d6d810058fad1c2",
 	"time": 1496324843225
 }
-	
+
+*/	
 	console.log("save detai;");
 
 	var consumers = request.params.consumers; //消费人列表, 数组

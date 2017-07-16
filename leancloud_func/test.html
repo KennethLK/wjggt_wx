@@ -46,7 +46,36 @@ var user = {};
 <div Id="consumeDetailContainer"> </div>
 <Button onclick="javascript: getCheckedItems()">选择的项目</Button>
 
+<Button onclick="javascript: checkGroupCode()">检查小队编号</Button>
+
+
+<Button onclick="javascript: getGroupCode()">获得小队编号</Button>
+
 <script type="text/javascript">
+
+function getGroupCode(){
+	var q_groupCode = new AV.Query('GroupCodes');
+	q_groupCode.equalTo('canUse', true);
+	q_groupCode.addDescending('createdAt');
+	q_groupCode.first().then(function(gcode){
+		alert(gcode.get('code'));
+	});
+}
+
+function checkGroupCode(){
+	var q_groupCode = new AV.Query('GroupCodes');
+	q_groupCode.equalTo('code', "87020");
+	q_groupCode.equalTo('canUse', true);
+	q_groupCode.find().then(function(gcodes){
+		var user = AV.Object.createWithoutData('WJUser', '592456f28d6d810058fad1c2');
+		throw new Error('on error')
+		// return user.fetch();
+	}).then(function(user){
+		alert('got');
+	}).catch(function(error){
+		alert(error);
+	})
+}
 
 function saveConsume()
 {

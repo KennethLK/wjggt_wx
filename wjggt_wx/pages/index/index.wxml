@@ -19,7 +19,7 @@
   <button style="width:200rpx;margin-top: 20rpx;" bindtap="joinGroup">加入小队</button>
 
   <view class="balance">成立午餐小队</view>
-  <input type="text" style="background-color: white;" placeholder="点这里输入小队名字" bindinput="inputName" />
+  <input type="text" style="background-color: white;" placeholder="点这里输入新建小队名字" bindinput="inputName" />
   <view class="balance" style="color: red">小队代号: {{new_code}}</view>
 
   <button style="width:200rpx;" bindtap="createGroup">成立小队</button>
