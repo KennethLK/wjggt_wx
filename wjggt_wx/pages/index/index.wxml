@@ -7,7 +7,7 @@
   <view class="cashContainer" style="{{show_info}}">
   <view class="balance">余额</view>
   <view class="{{cashclass}}">
-  {{cash}}
+  ¥ {{cash}}
   </view>
 
   <!--<view class="more_detail">↓↓↓↓↓详细↓↓↓↓↓</view>-->

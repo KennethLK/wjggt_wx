@@ -29,7 +29,7 @@
   width: 100%;
   height: 300rpx;
   text-align: center;
-  background-color: orangered;
+  background-color: #a1d57e;
   font-size:20rpx;
 }
 

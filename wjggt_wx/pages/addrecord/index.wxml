@@ -2,17 +2,17 @@
 <view style="margin: 20rpx">
     餐馆名字 <input id="money" class="input" value="" placeholder="新餐馆" />
     <view>
-    <checkbox-group bindchange="checkboxChange">
+    <radio-group bindchange="checkRestaurant">
       <block wx:for="{{restaurants}}" wx:for-item="restaurant" wx:key="*this" style="align-items: left; margin-right: 20rpx">
-        <view class="resitem"> <checkbox value="{{restaurant}}" /> {{restaurant}}</view>
+        <view class="resitem"> <radio value="{{restaurant}}" /> {{restaurant}}</view>
       </block>
-     </checkbox-group>
+     </radio-group>
      </view>
      <view class="cashTitle" style="height: 20rpx"></view>
     <view class="cashTitle">消费金额</view> <input id="money" type="number" class="input" value="100" />
     参与人员: 
     <view>
-      <checkbox-group bindchange="checkboxChange">
+      <checkbox-group bindchange="checkCustomer">
         <block wx:for="{{users}}" wx:for-item="user" wx:key="*this" class="restaurant">
           <view class="resitem"> <checkbox value="{{user.id}}" checked="true" /> {{user.name}} </view>
         </block>
@@ -20,7 +20,7 @@
      </view>
 </view>
 <view class="center">
-    <button>提交</button>
+    <button bindtap="onSave">提交</button>
 </view>
 
 
